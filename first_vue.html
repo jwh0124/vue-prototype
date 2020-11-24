@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js 애완 용품샵</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1 v-text="sitename"></h1>
+        </header>
+    </div>
+    <script type="text/javascript">
+        var APP_LOG_LIFECYCLE_EVENTS = true;
+
+        var webstore = new Vue({
+            el: '#app',
+            data: {
+                sitename: 'Vue.js 애완 용품샵',
+                id: 1001,
+                title: "고양이 사료, 25파운드",
+                description: "당신의 고양이를 위한 거부할 수 없는 유기농 25파운드 사료입니다.",
+                price: 2000,
+                image: "assets/images/product-fullsize.png"
+            },
+            beforeCreate() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("beforeCreate");
+                }
+            },
+            created() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("create");
+                }
+            },
+            beforeMount() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("beforeMount");
+                }
+            },
+            mounted() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("mounted");
+                }
+            },
+            beforeUpdate() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("beforeUpdate");
+                }
+            },
+            updated() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("updated");
+                }
+            },
+            beforeDestroy() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("beforeDestroy");
+                }
+            },
+            destroyed() {
+                if (APP_LOG_LIFECYCLE_EVENTS) {
+                    console.log("destroyed");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
