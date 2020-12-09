@@ -17,27 +17,48 @@
                     <h1 v-text="sitename"></h1>
                 </div>
                 <div class="nav navbar-nav navbar-right cart">
-                    <span class="glyphicon glyphicon-shopping-cart">
-                        {{cartItemCount}}
-                    </span>
+                    <button type="button" class="btn btn-default btn-lg" v-on:click="showCheckout">
+                        <span class="glyphicon glyphicon-shopping-cart">
+                            {{cartItemCount}}
+                        </span>
+                        <span>CheckOut</span>
+                    </button>
                 </div>
             </div>
         </header>
         <main>
             <div class="row product">
-                <div class="col-md-2 col-md-offset-1">
-                    <figure>
-                        <img v-bind:src="product.image" alt="cat">
-                    </figure>
+                <div v-if="showProduct">
+                    <div class="col-md-2 col-md-offset-1">
+                        <figure>
+                            <img v-bind:src="product.image" alt="cat">
+                        </figure>
+                    </div>
+                    <div class="col-md-6 col-md-offset-2 description">
+                        <h1 v-text="product.title"></h1>
+                        <p v-html="product.description"></p>
+                        <p class="price">
+                            {{product.price | formatPrice}}
+                        </p>
+                        <button class="btn btn-primary btn-lg" v-on:click="addToCart" v-if="canAddToCart">장바구니 담기</button>
+                        <button disabled="true" class="btn btn-primary btn-lg" v-else="canAddToCart">장바구니 담기</button>
+                    </div>
                 </div>
-                <div class="col-md-6 col-md-offset-2 description">
-                    <h1 v-text="product.title"></h1>
-                    <p v-html="product.description"></p>
-                    <p class="price">
-                        {{product.price | formatPrice}}
-                    </p>
-                    <button class="btn btn-primary btn-lg" v-on:click="addToCart" v-if="canAddToCart">장바구니 담기</button>
-                    <button disabled="true" class="btn btn-primary btn-lg" v-else="canAddToCart">장바구니 담기</button>
+                <div v-else>
+                    <div class="col-md-6">
+                        <strong>이름:</strong>
+                        <input v-model="order.firstName" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <strong>성:</strong>
+                        <input v-model="order.lastName" class="form-control" />
+                    </div>
+                    <div class="col-md-12" verify>
+                        <pre>
+                            이름: {{order.firstName}}
+                            성: {{order.lastName}}
+                        </pre>
+                    </div>
                 </div>
             </div>
         </main>
@@ -48,7 +69,12 @@
         var webstore = new Vue({
             el: '#app',
             data: {
+                showProduct: true,
                 sitename: "Vue.js 애완 용품샵",
+                order: {
+                    firstName: '',
+                    lastName: ''
+                },
                 product: {
                     id: 1001,
                     title: "고양이 사료, 25파운드",
@@ -81,6 +107,9 @@
             methods: {
                 addToCart: function() {
                     this.cart.push(this.product.id);
+                },
+                showCheckout() {
+                    this.showProduct = this.showProduct ? false : true;
                 }
             },
             computed: {
