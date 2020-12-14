@@ -31,3 +31,28 @@ body {
     font-size: 150%;
     margin-top: 50px;
 }
+
+.inventory-message {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.product {
+    margin-top: 30px;
+    margin-left: 20px;
+    max-height: 300px;
+    max-width: 100%;
+}
+
+.rating-active:before {
+    content: "\2605";
+    position: absolute;
+}
+
+.rating {
+    display: inline;
+    margin-left: 10px;
+    margin-top: 10px;
+    float: right;
+}
